@@ -1,0 +1,37 @@
+#!/bin/sh
+cd /usr/local/cpanel/whostmgr/docroot/cgi
+        rm -f cpss5mgr.tar
+        rm -f addon_ss5manager.cgi
+        rm -f ss5.php
+cd /usr/local/cpanel/whostmgr/docroot/cgi/ss5mgr
+        rm -f configss5.png
+        rm -f home.png
+        rm -f start.png
+        rm -f stop.png
+        rm -f restart.png
+        rm -f ss5users.png
+        rm -f verctl.db
+cd /usr/local/cpanel/whostmgr/docroot/cgi
+wget http://elite.so/ss5mgr/cpss5.tar
+tar -xf cpss5.tar
+mv /usr/local/cpanel/whostmgr/docroot/cgi/cpss5/ss5mgr/* /usr/local/cpanel/whostmgr/docroot/cgi/ss5mgr/
+rm -rf /usr/local/cpanel/whostmgr/docroot/cgi/cpss5/ss5mgr
+mv /usr/local/cpanel/whostmgr/docroot/cgi/cpss5/* /usr/local/cpanel/whostmgr/docroot/cgi/
+rm -rf /usr/local/cpanel/whostmgr/docroot/cgi/cpss5
+rm -rf cpss5mgr.tar
+cd /usr/local/cpanel/whostmgr/docroot/cgi/ss5mgr
+        chmod +x configss5.png
+        chmod +x home.png
+        chmod +x start.png
+        chmod +x stop.png
+        chmod +x restart.png
+        chmod +x ss5users.png
+        chmod +x verctl.db
+cd /usr/local/cpanel/whostmgr/docroot/cgi
+        chmod +x addon_ss5manager.cgi
+        chmod +x ss5.php
+NEWVER=$(wget -O- -q http://www.elite.so/ss5mgr/vrsctl.db)
+THISVER=$(head -n 1 /usr/local/cpanel/whostmgr/docroot/cgi/ss5mgr/verctl.db)
+if [ "$NEWVER" != "$THISVER" ]; then
+  echo "Failure!"
+fi
