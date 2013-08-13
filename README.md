@@ -8,8 +8,16 @@ Edit Crontab File
 
 Changelog
 ==========
-Crontab Admin V1
-Added ability to edit & save crontab
+V1
+
+*Added ability to edit & save crontab
+
+V1.1
+
+*Fixed issue where crontab would not import without blank line at end of temp file
+
+*Added check for blank lines
+
 
 Requirements
 ==========

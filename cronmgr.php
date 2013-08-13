@@ -16,6 +16,34 @@
 
 header("Content-Type: text/html\n\n");
 
+function cleanBlanks($fullPath, $file)
+{
+//$fullPath = test file to read 
+//$file = test file to write 
+$filecontent = file($fullPath); // put content in array 
+$num_lines = count($filecontent); // determine num of lines 
+$fp = fopen($file, 'w'); // create file pointer 
+for($i = 1; $i < $num_lines; $i++) // start loop 
+{ 
+    $line = trim($filecontent[$i]); // trim line 
+    if(!empty($line)) // if not empty 
+    { 
+        if($i < count($filecontent) - 1) 
+        { 
+            fwrite($fp, $line . "\n"); // add NEW line 
+        } 
+        else { 
+            fwrite($fp, $line); 
+        } 
+     } 
+} 
+fclose($fp); // close file pointer 
+shell_exec("rm -f ".$fullpath); //delete the infile
+shell_exec("cp ".$file." ".$fullpath); //replace the infile with the temp file
+shell_exec("rm -f ".$file); //delete the temp file
+file_put_contents($fullPath, "\n", FILE_APPEND | LOCK_EX); //append a new line to the infile (caused issues with crontab if not added to file)
+}
+
 // *** Common variables ***
 $cpAppName = 'Crontab Admin';
 $cpAppVersion = '1.0 Beta Version';
@@ -94,7 +122,8 @@ shell_exec("rm -f /root/cron.backup");
 shell_exec("crontab -l > /root/cron.backup");
 //write to temp cron
 file_put_contents("/root/cron.temp", $conf);
-// import new cron
+cleanBlanks("/root/cron.temp", "/root/cron2.temp");
+//import new cron
 shell_exec("crontab /root/cron.temp");
 //remove temp file
 shell_exec("rm -f /root/cron.temp");
