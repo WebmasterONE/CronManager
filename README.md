@@ -29,7 +29,7 @@ Installation
 ==========
 From your cpanel-based server type the following commands into ssh as root:
 
-wget https://raw.github.com/Crazy-Coderz/CronManager/master/Install.sh
+wget https://raw.github.com/Crazy-Coderz/CronManager/master/install.sh
 
 chmod 777 install.sh
 
