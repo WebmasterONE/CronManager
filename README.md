@@ -22,4 +22,25 @@ V1.1
 Requirements
 ==========
 Cpanel/WHM for VPS or Dedicated Servers
+
 CentOS or any RHEL Based Linux OS
+
+Installation
+==========
+From your cpanel-based server type the following commands into ssh as root:
+
+wget https://raw.github.com/Crazy-Coderz/CronManager/master/Install.sh
+
+chmod 777 install.sh
+
+./install.sh
+
+Removal
+==========
+From your cpanel-based server type the following commands into ssh as root:
+
+wget https://raw.github.com/Crazy-Coderz/CronManager/master/uninstall.sh
+
+chmod 777 uninstall.sh
+
+./uninstall.sh
